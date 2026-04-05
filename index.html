@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn AI Security — Cyber Queen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Merriweather:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:        #FFF4EE;
+    --cream-dark:   #F5E8DE;
+    --cream-deeper: #EDD9CC;
+    --blush:        #C3BCAF;
+    --teal:         #60AE9D;
+    --teal-light:   rgba(96,174,157,0.12);
+    --teal-mid:     rgba(96,174,157,0.25);
+    --rose:         #AB7767;
+    --rose-bright:  #C4897A;
+    --rose-light:   rgba(171,119,103,0.12);
+    --rose-mid:     rgba(171,119,103,0.25);
+    --light-pink:   #EEC9BE;
+    --grey:         #6D6D6D;
+    --dark:         #2C1F1A;
+    --text-body:    #5A3E35;
+    --text-muted:   #8C7068;
+    --border:       rgba(171,119,103,0.2);
+    --border-mid:   rgba(171,119,103,0.35);
+    --white:        #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,244,238,0.94);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo-img {
+    width: 40px; height: 40px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  /* FIX 1: Cyber Queen wordmark — rose gold only, no black */
+  .nav-wordmark {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--rose);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-body);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rose); }
+
+  .nav-cta {
+    padding: 8px 20px;
+    background: var(--rose) !important;
+    border-radius: 100px;
+    color: var(--cream) !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--rose-bright) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(171,119,103,0.3) !important;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 48px 100px;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .hero-blob-1 {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(196,137,122,0.1) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-blob-2 {
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(96,174,157,0.07) 0%, transparent 65%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(171,119,103,0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .hero-left { position: relative; z-index: 1; max-width: 700px; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border: 1px solid var(--teal-mid);
+    border-radius: 100px;
+    background: var(--teal-light);
+  }
+
+  .eyebrow-dot {
+    width: 5px; height: 5px;
+    background: var(--teal);
+    border-radius: 50%;
+    animation: blink 2.5s infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .hero-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(44px, 6vw, 80px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    color: var(--dark);
+  }
+
+  .hero-title .italic { font-style: italic; color: var(--rose); }
+
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text-body);
+    line-height: 1.85;
+    margin-bottom: 40px;
+    max-width: 460px;
+  }
+
+  .hero-sub strong { font-weight: 600; color: var(--dark); }
+
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .btn-rose {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--rose);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.25s;
+  }
+
+  .btn-rose:hover {
+    background: var(--rose-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(171,119,103,0.3);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border: 1px solid var(--border-mid);
+    color: var(--text-body);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.25s;
+  }
+
+  .btn-outline:hover {
+    background: var(--rose-light);
+    border-color: var(--rose);
+    color: var(--rose);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 52px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .stat-num {
+    font-family: 'Merriweather', serif;
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-num sup { font-size: 13px; color: var(--rose); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* hero right removed */
+
+  /* ── AUTHOR STRIP ── */
+  .author-strip {
+    padding: 20px 48px;
+    background: var(--cream-dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .author-info { display: flex; align-items: center; gap: 14px; }
+
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), var(--light-pink));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--cream);
+    flex-shrink: 0;
+  }
+
+  .author-name { font-weight: 600; font-size: 14px; color: var(--dark); }
+  .author-role { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+  .social-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border: 1px solid var(--border-mid);
+    border-radius: 100px;
+    color: var(--text-body);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--cream);
+    transition: all 0.2s;
+  }
+
+  .social-link:hover {
+    border-color: var(--rose);
+    color: var(--rose);
+    background: var(--rose-light);
+  }
+
+  /* ── STAT BANNER ── */
+  .stat-banner-wrap { background: var(--dark); padding: 64px 48px; }
+
+  .stat-banner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,244,238,0.08);
+    border: 1px solid rgba(255,244,238,0.1);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .stat-cell { background: rgba(255,244,238,0.03); padding: 44px 32px; text-align: center; }
+
+  .stat-big {
+    font-family: 'Merriweather', serif;
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--light-pink);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .stat-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,244,238,0.5);
+    line-height: 1.65;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  /* ── SECTIONS ── */
+  .section { padding: 96px 48px; max-width: 1140px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 46px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: var(--dark);
+  }
+
+  .section-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--text-body);
+    max-width: 560px;
+    line-height: 1.85;
+    margin-bottom: 52px;
+  }
+
+  .divider { border: none; border-top: 1px solid var(--border); }
+
+  /* ── WHY GRID ── */
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .why-card {
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--white);
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px rgba(171,119,103,0.06);
+  }
+
+  .why-card:hover {
+    border-color: var(--rose);
+    box-shadow: 0 8px 32px rgba(171,119,103,0.12);
+    transform: translateY(-2px);
+  }
+
+  .why-icon { font-size: 26px; margin-bottom: 14px; }
+  .why-title { font-weight: 600; font-size: 16px; color: var(--dark); margin-bottom: 10px; }
+  .why-text { font-size: 13px; font-weight: 300; color: var(--text-body); line-height: 1.75; }
+
+  /* ── SERIES GRID ── */
+  .series-bg { background: var(--cream-dark); }
+
+  .series-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 14px;
+  }
+
+  .series-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    text-decoration: none;
+    color: var(--dark);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    display: block;
+    box-shadow: 0 2px 8px rgba(171,119,103,0.05);
+  }
+
+  .series-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--light-pink));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .series-card:hover {
+    border-color: var(--rose);
+    box-shadow: 0 10px 36px rgba(171,119,103,0.15);
+    transform: translateY(-3px);
+  }
+
+  .series-card:hover::before,
+  .series-card.live::before { transform: scaleX(1); }
+
+  .series-card.live {
+    border-color: rgba(96,174,157,0.4);
+    background: var(--white);
+  }
+
+  .series-card.live::before {
+    background: linear-gradient(90deg, var(--teal), var(--rose));
+  }
+
+  .card-num {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--blush);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .series-card.live .card-num { color: var(--teal); }
+  .card-title { font-weight: 600; font-size: 15px; line-height: 1.35; margin-bottom: 10px; color: var(--dark); }
+  .card-desc { font-size: 12px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+
+  .card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 18px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .badge-live { background: rgba(96,174,157,0.1); color: var(--teal); border: 1px solid rgba(96,174,157,0.3); }
+  .badge-coming { background: rgba(171,119,103,0.06); color: var(--blush); border: 1px solid var(--border); }
+
+  /* ── FIX 3: YOUTUBE SECTION replaces CTA ── */
+  .youtube-wrap {
+    padding: 96px 48px;
+    background: var(--cream-dark);
+    border-top: 1px solid var(--border);
+  }
+
+  .youtube-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .youtube-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .youtube-title-wrap {}
+
+  .yt-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 10px;
+  }
+
+  .yt-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    font-size: clamp(26px, 3.5vw, 40px);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--dark);
+  }
+
+  .yt-title em { font-style: italic; color: var(--rose); }
+
+  .yt-channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--rose);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .yt-channel-link:hover {
+    background: var(--rose-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(171,119,103,0.3);
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .video-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px rgba(171,119,103,0.06);
+  }
+
+  .video-card:hover {
+    border-color: var(--rose);
+    box-shadow: 0 12px 40px rgba(171,119,103,0.15);
+    transform: translateY(-3px);
+  }
+
+  .video-embed-wrap {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: var(--dark);
+  }
+
+  .video-embed-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    padding: 20px 24px;
+  }
+
+  .video-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--teal-light);
+    border: 1px solid var(--teal-mid);
+    border-radius: 100px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+
+  .video-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--dark);
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .video-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--dark);
+  }
+
+  .footer-brand { font-weight: 700; font-size: 14px; color: var(--rose-bright); }
+  .footer-copy { font-size: 12px; color: rgba(255,244,238,0.3); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: rgba(255,244,238,0.4); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--light-pink); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up { opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease forwards; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  .d1{animation-delay:0.1s} .d2{animation-delay:0.25s} .d3{animation-delay:0.4s}
+  .d4{animation-delay:0.55s} .d5{animation-delay:0.7s}
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+    .author-strip { padding: 16px 24px; }
+    .social-links { display: none; }
+    .stat-banner-wrap { padding: 40px 24px; }
+    .stat-banner { grid-template-columns: 1fr; }
+    .section { padding: 60px 24px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .youtube-wrap { padding: 60px 24px; }
+    .video-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img
+      src="https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2FMIDW-boj8tLtnOd03yyvrJTpo1IUOkzZk07z-K4L2BY.png/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAH-Q9M2YHWSdk-wSNBCvhOhDaKxRv94fkcHq5BjybJY9&exp=1775445276&osig=AAAAAAAAAAAAAAAAAAAAABdefvK0qIR827sDwYcIkQ_Btmo0Ew8ZQ6jYJZqPqsUT&signer=media-rpc&x-canva-quality=thumbnail"
+      alt="Cyber Queen Logo"
+      class="nav-logo-img"
+    >
+    <!-- FIX 1: Rose gold only, two words, no black -->
+    <span class="nav-wordmark">Cyber Queen</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#series">The Series</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="https://github.com/YourCybersecurityBestie/Learn-AI-Security-" target="_blank">GitHub</a></li>
+    <li><a href="https://www.instagram.com/cyber.queen_/" target="_blank" class="nav-cta">@cyber.queen_</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+  <div class="hero-dots"></div>
+
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-up">
+      <span class="eyebrow-dot"></span>
+      Free · Open · No gatekeeping
+    </div>
+    <h1 class="hero-title fade-up d1">
+      Learn<br>
+      AI<br>
+      <span class="italic">Security.</span>
+    </h1>
+    <p class="hero-sub fade-up d2">
+      Built for <strong>beginners, practitioners, and everyone in between.</strong>
+      No assumed knowledge. No skipped steps. Just clear, honest education
+      from inside the industry.
+    </p>
+    <div class="hero-btns fade-up d3">
+      <a href="#series" class="btn-rose">Start the Series →</a>
+      <a href="https://github.com/YourCybersecurityBestie/Learn-AI-Security-" target="_blank" class="btn-outline">View on GitHub</a>
+    </div>
+    <div class="hero-stats fade-up d4">
+      <div>
+        <div class="stat-num">8<sup>×</sup></div>
+        <div class="stat-label">Deep dives</div>
+      </div>
+      <div>
+        <div class="stat-num">4</div>
+        <div class="stat-label">Frameworks</div>
+      </div>
+      <div>
+        <div class="stat-num">Free</div>
+        <div class="stat-label">Always</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── AUTHOR STRIP ── -->
+<div class="author-strip">
+  <div class="author-info">
+    <div class="author-avatar">VS</div>
+    <div>
+      <div class="author-name">Venicia Solomons</div>
+      <div class="author-role">Cloud & AI Security Solutions Engineer · Microsoft Denmark</div>
+    </div>
+  </div>
+  <div class="social-links">
+    <a href="https://www.instagram.com/cyber.queen_/" target="_blank" class="social-link">📸 Instagram</a>
+    <a href="https://www.linkedin.com/in/veniciasolomons/" target="_blank" class="social-link">💼 LinkedIn</a>
+    <a href="https://www.youtube.com/@cyber.queen_" target="_blank" class="social-link">▶️ YouTube</a>
+    <a href="https://www.tiktok.com/@cyber.queen_" target="_blank" class="social-link">🎵 TikTok</a>
+  </div>
+</div>
+
+<!-- ── STAT BANNER ── -->
+<div class="stat-banner-wrap">
+  <div class="stat-banner">
+    <div class="stat-cell">
+      <div class="stat-big">73%</div>
+      <div class="stat-desc">of enterprises have hundreds of AI models running in production right now</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-big">41%</div>
+      <div class="stat-desc">reported an AI security incident by late 2024 with zero AI-specific controls</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-big">0</div>
+      <div class="stat-desc">excuses for not understanding the attack surface you are responsible for securing</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHY ── -->
+<div style="background: var(--cream);">
+  <div class="section" id="why">
+    <div class="section-eyebrow">Why this series exists</div>
+    <h2 class="section-title">The attack surface is here.<br>Most teams are not ready.</h2>
+    <p class="section-sub">AI is not a future problem for security professionals to figure out someday. It is a present one. This series exists to close that gap — one fundamental at a time.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Built for real learning</div>
+        <div class="why-text">No assumed knowledge. No skipped steps. We start from what a model actually is and build from there. Breaking in or already working in security, there is something here for you.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔓</div>
+        <div class="why-title">Completely free and open</div>
+        <div class="why-text">Every resource lives in this GitHub repo. No paywall. No course to buy. Security education should be accessible to everyone — full stop.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <div class="why-title">Practical, not theoretical</div>
+        <div class="why-text">Real incidents. Real models. Real controls. Every post is grounded in what is actually happening in enterprise environments right now.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🌍</div>
+        <div class="why-title">Built by someone in the room</div>
+        <div class="why-text">Venicia works in Cloud & AI Security at Microsoft Denmark. The insights here come from inside the industry, shared freely with the community.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ── SERIES ── -->
+<div class="series-bg">
+  <div class="section" id="series">
+    <div class="section-eyebrow">The series</div>
+    <h2 class="section-title">8 fundamentals.<br>Start anywhere.</h2>
+    <p class="section-sub">Each post covers one core concept. Read in order for the full picture, or jump to what is most relevant to where you are right now.</p>
+    <div class="series-grid">
+      <a href="./ai-model-security-fundamentals.md" class="series-card live">
+        <div class="card-num">Post 01</div>
+        <div class="card-title">The Model</div>
+        <div class="card-desc">What a model actually is, the 3 core attack paths, real incidents, security controls, and the 4 frameworks you need to know.</div>
+        <span class="card-badge badge-live">● Live now</span>
+      </a>
+      <div class="series-card">
+        <div class="card-num">Post 02</div>
+        <div class="card-title">Training vs Inference</div>
+        <div class="card-desc">Two completely different attack surfaces. Understanding the difference changes how you think about AI risk entirely.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+      <div class="series-card">
+        <div class="card-num">Post 03</div>
+        <div class="card-title">Prompts are Inputs</div>
+        <div class="card-desc">Where prompt injection lives and why treating prompts as trusted input is one of the most dangerous mistakes in AI deployment.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+      <div class="series-card">
+        <div class="card-num">Post 04</div>
+        <div class="card-title">Context Windows</div>
+        <div class="card-desc">What the model sees at any given time and how attackers use that window against you.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+      <div class="series-card">
+        <div class="card-num">Post 05</div>
+        <div class="card-title">Embeddings & Vector Databases</div>
+        <div class="card-desc">How AI remembers things, how RAG pipelines work, and the retrieval-based attacks most teams are completely unprepared for.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+      <div class="series-card">
+        <div class="card-num">Post 06</div>
+        <div class="card-title">Agents & Tool Use</div>
+        <div class="card-desc">When AI can take actions, the blast radius explodes. The most important post in this series right now.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+      <div class="series-card">
+        <div class="card-num">Post 07</div>
+        <div class="card-title">Fine-tuning & RLHF</div>
+        <div class="card-desc">How models get customised and why the supply chain risk at the AI layer needs to be on every security team's radar.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+      <div class="series-card">
+        <div class="card-num">Post 08</div>
+        <div class="card-title">APIs as the Delivery Mechanism</div>
+        <div class="card-desc">Most enterprise AI is API-first. Classic API attack surface — now with an LLM sitting on top of it.</div>
+        <span class="card-badge badge-coming">Coming soon</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FIX 3: YOUTUBE SECTION ── -->
+<div class="youtube-wrap" id="videos">
+  <div class="youtube-inner">
+    <div class="youtube-header">
+      <div class="youtube-title-wrap">
+        <div class="yt-eyebrow">Watch on YouTube</div>
+        <h2 class="yt-title">Learn with me.<br><em>Latest videos.</em></h2>
+      </div>
+      <a href="https://www.youtube.com/@cyber.queen_" target="_blank" class="yt-channel-link">
+        ▶️ Visit the Channel
+      </a>
+    </div>
+
+    <div class="video-grid">
+      <!-- VIDEO 1: Replace YOUR_VIDEO_ID_1 with actual YouTube video ID -->
+      <div class="video-card">
+        <div class="video-embed-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1"
+            title="Cyber Queen YouTube Video 1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Latest</span>
+          <div class="video-title">Update with your video title</div>
+          <div class="video-desc">Replace YOUR_VIDEO_ID_1 in the HTML with the ID from your latest YouTube video URL.</div>
+        </div>
+      </div>
+
+      <!-- VIDEO 2: Replace YOUR_VIDEO_ID_2 with actual YouTube video ID -->
+      <div class="video-card">
+        <div class="video-embed-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2"
+            title="Cyber Queen YouTube Video 2"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="video-info">
+          <span class="video-tag">Recent</span>
+          <div class="video-title">Update with your video title</div>
+          <div class="video-desc">Replace YOUR_VIDEO_ID_2 in the HTML with the ID from your second most recent YouTube video URL.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-brand">Cyber Queen © 2026</div>
+  <div class="footer-copy">Built with love for the security community. No gatekeeping. Just knowledge.</div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/cyber.queen_/" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/veniciasolomons/" target="_blank">LinkedIn</a>
+    <a href="https://www.youtube.com/@cyber.queen_" target="_blank">YouTube</a>
+    <a href="https://www.tiktok.com/@cyber.queen_" target="_blank">TikTok</a>
+    <a href="https://github.com/YourCybersecurityBestie/Learn-AI-Security-" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>
