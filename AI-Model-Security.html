@@ -83,7 +83,7 @@
 
   /* ── HERO ── */
   .article-hero {
-    background: var(--dark);
+    background: linear-gradient(135deg, var(--cream-dark) 0%, var(--light-pink) 50%, var(--rose-bright) 100%);
     padding: 72px 48px 64px;
     position: relative;
     overflow: hidden;
@@ -94,7 +94,7 @@
     position: absolute;
     top: -200px; right: -200px;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(196,137,122,0.1) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(96,174,157,0.15) 0%, transparent 65%);
     border-radius: 50%;
     pointer-events: none;
   }
@@ -103,7 +103,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, rgba(255,244,238,0.04) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(44,31,26,0.06) 1px, transparent 1px);
     background-size: 28px 28px;
     pointer-events: none;
   }
@@ -134,16 +134,16 @@
     font-size: clamp(36px, 5vw, 60px);
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: var(--cream);
+    color: var(--dark);
     margin-bottom: 20px;
   }
 
-  .article-title em { font-style: italic; color: var(--light-pink); }
+  .article-title em { font-style: italic; color: var(--rose); }
 
   .article-sub {
     font-size: 16px;
     font-weight: 300;
-    color: rgba(255,244,238,0.65);
+    color: var(--text-body);
     line-height: 1.8;
     max-width: 620px;
     margin-bottom: 36px;
@@ -154,7 +154,7 @@
     align-items: center;
     gap: 12px;
     padding-top: 28px;
-    border-top: 1px solid rgba(255,244,238,0.1);
+    border-top: 1px solid var(--border-mid);
   }
 
   .author-av {
@@ -170,8 +170,8 @@
     flex-shrink: 0;
   }
 
-  .author-name { font-size: 14px; font-weight: 600; color: var(--cream); }
-  .author-role { font-size: 12px; color: rgba(255,244,238,0.5); margin-top: 1px; }
+  .author-name { font-size: 14px; font-weight: 600; color: var(--dark); }
+  .author-role { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 
   /* ── TOC ── */
   .toc-wrap {
