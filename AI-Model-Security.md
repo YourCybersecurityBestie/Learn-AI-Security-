@@ -2,7 +2,7 @@
 ### A Cyber Queen Deep Dive — Model Security
 
 > **By Venicia Solomons ([@cyber.queen_](https://www.instagram.com/cyber.queen_/))**  
-> Cloud & AI Security · Microsoft
+> Cloud & AI Security
 >
 > Connect with me: 
 > [Instagram](https://www.instagram.com/cyber.queen_/) · [LinkedIn](https://www.linkedin.com/in/veniciasolomons/) · [YouTube](https://www.youtube.com/@cyber.queen_) · [TikTok](https://www.tiktok.com/@cyber.queen_) 
@@ -320,7 +320,6 @@ That single question could protect you and your company. If nobody can answer it
 - 📄 [MITRE ATLAS Knowledge Base](https://atlas.mitre.org)
 - 📄 [NIST AI Risk Management Framework](https://airc.nist.gov/Home)
 - 📄 [Anthropic AI Espionage Case Study](https://www.anthropic.com/news/disrupting-AI-espionage)
-- 📄 [Microsoft Security Blog](https://www.microsoft.com/en-us/security/blog/)
 
 ### Coming Up in This Series
 

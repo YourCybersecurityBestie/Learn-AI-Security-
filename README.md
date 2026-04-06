@@ -1,7 +1,7 @@
 # Learn AI Security 🔐
 
 > Built by Venicia Solomons (@cyber.queen_)
-> Cloud and AI Security at Microsoft
+> Cloud & AI Security
 > 
 Welcome to the Learn AI Security repo — a free, open resource for 
 anyone learning AI security from the ground up.
